@@ -29,11 +29,15 @@ export default function Admin() {
               <NameCard title="Product" />
             </a>
           </Link>
-          <Link href="">
-            <NameCard title="Stakeholder" />
+          <Link href="/">
+            <a>
+              <NameCard title="Stakeholder" />
+            </a>
           </Link>
-          <Link href="">
-            <NameCard title="Process" />
+          <Link href="/">
+            <a>
+              <NameCard title="Process" />
+            </a>
           </Link>
         </div>
       </div>

@@ -1,63 +1,170 @@
-.header{
-    font-size: 2.5rem;
-    font-weight: 500;
-    margin: 15px;
-    color: #433009;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+.header {
+  font-size: 2.5rem;
+  font-weight: 500;
+  margin: 15px;
+  color: #433009;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-.card{
-    width: 25rem;
-    height: 15rem;
-    background-color: rgba(64,41,0,1);
-    opacity: 0.8;
-    border-radius: 25px;
-    box-shadow: 15px 15px 15px rgba(15,15,15,0.78);
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
+.card {
+  width: 25rem;
+  height: 15rem;
+  background-color: rgba(64, 41, 0, 1);
+  opacity: 0.8;
+  border-radius: 25px;
+  box-shadow: 15px 15px 15px rgba(15, 15, 15, 0.78);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
 }
 
-.cardContent{
-    font-size: 2.5rem;
-    font-weight: 500;
-    color: #fff;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+.cardContent {
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-.homeCardContainer{
-    margin-top: 30vh;
-    margin-left: 25vh;
-    margin-right:25vh;
-    margin-bottom: 25vh;
+.eventCard {
+  width: 13rem;
+  height: 13rem;
+  background-color: rgba(64, 41, 0, 1);
+  opacity: 0.8;
+  border-radius: 25px;
+  box-shadow: 15px 15px 15px rgba(15, 15, 15, 0.78);
+  padding: 20px;
+  display: flex;
+  flex-flow: column;
+  grid-gap: 20px;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
-.CardContainer{
-    margin-top: 30vh;
-    margin-left: 10vh;
-    margin-right:10vh;
-    margin-bottom: 25vh;
+.eventCardText {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-.homeContentCards{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    width: 100%;
-    grid-gap: 20px;
+.eventRowCard {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: nowrap;
 }
 
-.homeButton{
-    margin: 15px;
-    width: 2.5rem;
-    fill: #fff;
-    opacity: 0.68;
+.homeCardContainer {
+  margin-top: 30vh;
+  margin-left: 25vh;
+  margin-right: 25vh;
+  margin-bottom: 25vh;
 }
 
-.navBar{
-    display: flex;
-    justify-content: space-between;
+.CardContainer {
+  margin-top: 30vh;
+  margin-left: 10vh;
+  margin-right: 10vh;
+  margin-bottom: 25vh;
+}
+
+.homeContentCards {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  grid-gap: 20px;
+}
+
+.homeButton {
+  margin: 15px;
+  width: 2.5rem;
+  fill: #fff;
+  opacity: 0.68;
+}
+
+.navBar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.descriptionFormCard {
+  width: 60vw;
+  height: 8vh;
+  background-color: rgba(64, 41, 0, 1);
+  opacity: 0.8;
+  border-radius: 10px;
+  box-shadow: 15px 15px 15px rgba(15, 15, 15, 0.78);
+  display: flex;
+  flex-flow: row;
+  grid-gap: 20px;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  margin-left: 15px;
+  margin-top: 2vh;
+  margin-bottom: 8vh;
+}
+
+.descriptionFormTitle {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.descriptionFormInput {
+  width: 30vw;
+  height: 5vh;
+  border-radius: 10px;
+  border: 1px solid #fff;
+  padding: 10px;
+  margin-left: 1vw;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: rgba(64, 41, 0, 1);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.formButton {
+  width: 15vw;
+  height: 5vh;
+  border-radius: 10px;
+  background-color: #91a6b7;
+  border: 1px solid #91a6b7;
+  margin-left: 3vw;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.descriptionCard {
+  width: 60vw;
+  height: 8vh;
+  background-color: rgba(64, 41, 0, 1);
+  opacity: 0.8;
+  border-radius: 10px;
+  box-shadow: 15px 15px 15px rgba(15, 15, 15, 0.78);
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  grid-gap: 20px;
+  justify-content: flex-start;
+  padding-left: 20px;
+  align-items: center;
+  box-sizing: border-box;
+  margin-left: 15px;
+  margin-top: 2vh;
+  margin-bottom: 8vh;
 }
