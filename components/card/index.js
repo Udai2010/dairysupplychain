@@ -7,8 +7,10 @@ import styles from '../../styles/Home.module.css'
 const NameCard = ({title}) => {
   return (
     <div className={styles.card}>
-      <Typography className={styles.cardContent}>
-        {title}
+      <Typography variant="h2" className={styles.cardContent}>
+         {title}
+       
+      
       </Typography>
     </div>
   );
