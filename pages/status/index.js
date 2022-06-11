@@ -1,19 +1,53 @@
 import Head from "next/head";
 import Link from "next/link";
 import styles from "../../styles/Home.module.css";
-import React, { useEffect, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import Header from "../../components/header/index";
 import HomeButton from "../../components/homeButton";
 import EventCard from "../../components/eventCards";
+import product from "../../ethereum/product";
+import web3 from "../../ethereum/web3";
+import { Typography } from "@mui/material";
 
-let arr = [1, 2, 3, 4, 5, 6];
+const Status = () => {
+  const [productDetails, setProductDetails] = useState([]);
+  const [currStatus, setCurrStatus] = useState(0);
 
-export default function Status() {
-  const [productId, setproductId] = useState("");
+  const [account, setAccount] = useState("Loading");
 
-  const getInput = (id) => {
-    setproductId(id);
+  const fetchAccount = async () => {
+    const acc = await web3.eth.getAccounts();
+    setAccount(acc[0]);
   };
+
+  useEffect(() => {
+    fetchAccount();
+  }, [account]);
+
+  useEffect(() => {}, [productDetails]);
+
+  const formSubmit = async (e) => {
+    e.preventDefault();
+    const pid = e.target[0].value;
+    try {
+      const accounts = await web3.eth.getAccounts();
+      setAccount(accounts[0]);
+      const pd = await product.methods.getProduct(pid).call({
+        from: account,
+      });
+
+      setCurrStatus(
+        await product.methods.getCurrStatus(pid).call({
+          from: account,
+        })
+      );
+
+      setProductDetails(pd[4]);
+    } catch (err) {
+      alert(err);
+    }
+  };
+
   return (
     <>
       <Head>
@@ -29,40 +63,74 @@ export default function Status() {
           </a>
         </Link>
       </div>
-      <div className={styles.descriptionFormCard}>
-        <form name="search">
-          <label className={styles.descriptionFormTitle}>Product Id: </label>
-          <input
-            className={styles.descriptionFormInput}
-            name="id"
-            type="text"
-            // onChange={(e) => {
-            //   e.preventDefault();
-            //   console.log(e.target.value);
-            //   setproductId(e.target.value);
-            // }}
-          ></input>
-          <input
-            className={styles.formButton}
-            value="Fetch"
-            type="submit"
-            onClick={(e) => {
-              e.preventDefault();
-              getInput(search.id);
-            }}
-          ></input>
-        </form>
+      <div className={styles.statusHeader}>
+        <div className={styles.descriptionFormCard}>
+          <form name="search" onSubmit={formSubmit}>
+            <label className={styles.descriptionFormTitle}>Product Id: </label>
+            <input
+              className={styles.descriptionFormInput}
+              name="id"
+              type="text"
+            ></input>
+            <button className={styles.formButton}>Fetch</button>
+          </form>
+        </div>
+        <div className={styles.addressContainer}>
+          <Typography className={styles.descriptionFormTitle}> User:</Typography>
+          <Typography className={styles.addressText}>{account}</Typography>
+        </div>
       </div>
-      <div className={styles.descriptionCard}>
-        <div className={styles.descriptionFormTitle}>Product description: </div>
-        <div className={styles.descriptionFormTitle}> desc</div>
-      </div>
-      <div className={styles.eventRowCard}>
-        {arr &&
-          arr.map((row) => (
-            <EventCard location="Chennai" temperature="36 C" time="10:00 pm" />
-          ))}
+      <div className={styles.statusContainer}>
+        <div
+          className={
+            productDetails.length > 0
+              ? styles.eventCardContainer
+              : styles.eventCardContainerRed
+          }
+        >
+          <Typography className={styles.eventCardTitle}>
+            Raw Material
+          </Typography>
+          {productDetails.length>0 && 
+            <div className={styles.eventRowCard}>
+              {productDetails &&
+                productDetails.map((row) => (
+                  <EventCard
+                    name={row[1]}
+                    quantity={row[3]}
+                    location={row[4]}
+                    temperature={row[5]}
+                    timestamp={row[2]}
+                  />
+                ))}
+            </div>
+          }
+        </div>
+        <div
+          className={
+            currStatus >= 2
+              ? styles.eventCardContainer
+              : styles.eventCardContainerRed
+          }
+        >
+          <Typography className={styles.eventCardTitle}>
+            Pasteurization
+          </Typography>
+        </div>
+        <div
+          className={
+            currStatus >= 3
+              ? styles.eventCardContainer
+              : styles.eventCardContainerRed
+          }
+        >
+          <Typography className={styles.eventCardTitle}>
+            Out for delivery
+          </Typography>
+        </div>
       </div>
     </>
   );
-}
+};
+
+export default Status;
