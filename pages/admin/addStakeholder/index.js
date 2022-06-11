@@ -26,7 +26,7 @@ class Admin extends Component {
         from: accounts[0],
       });
 
-      if (supply > reqQuantity) {
+      if (parseInt(supply) > reqQuantity) {
         alert("Required quantity is less than the supply.");
       } else {
         await product.methods

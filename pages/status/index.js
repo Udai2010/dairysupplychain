@@ -13,7 +13,7 @@ const Status = () => {
   const [productDetails, setProductDetails] = useState([]);
   const [currStatus, setCurrStatus] = useState(0);
 
-  const [account, setAccount] = useState("Loading");
+  const [account, setAccount] = useState("");
 
   const fetchAccount = async () => {
     const acc = await web3.eth.getAccounts();
@@ -48,7 +48,34 @@ const Status = () => {
     }
   };
 
+  const finishPasteurization = async (e) => {
+    e.preventDefault();
+    const pid = e.target[0].value;
+    try {
+      const accounts = await web3.eth.getAccounts();
+      setAccount(accounts[0]);
 
+      const quantity = await product.methods.getProductQuantity(pid).call({
+        from: account,
+      });
+
+      if (quantity == 0) {
+        const fp = await product.methods.finishPasteurization(pid).send({
+          from: account,
+        });
+      } else {
+        alert("Requirement not fulfilled");
+      }
+
+      setCurrStatus(
+        await product.methods.getCurrStatus(pid).call({
+          from: account,
+        })
+      );
+    } catch (err) {
+      alert(err);
+    }
+  };
   return (
     <>
       <Head>
@@ -77,7 +104,10 @@ const Status = () => {
           </form>
         </div>
         <div className={styles.addressContainer}>
-          <Typography className={styles.descriptionFormTitle}> User:</Typography>
+          <Typography className={styles.descriptionFormTitle}>
+            {" "}
+            User:
+          </Typography>
           <Typography className={styles.addressText}>{account}</Typography>
         </div>
       </div>
@@ -92,7 +122,7 @@ const Status = () => {
           <Typography className={styles.eventCardTitle}>
             Raw Material
           </Typography>
-          {productDetails.length>0 && 
+          {productDetails.length > 0 && (
             <div className={styles.eventRowCard}>
               {productDetails &&
                 productDetails.map((row) => (
@@ -106,7 +136,7 @@ const Status = () => {
                   />
                 ))}
             </div>
-          }
+          )}
         </div>
         <div
           className={
@@ -118,7 +148,21 @@ const Status = () => {
           <Typography className={styles.eventCardTitle}>
             Pasteurization
           </Typography>
+          {account && currStatus < 3 && (
+            <div className={styles.finishFormContainer}>
+              <form name="search" onSubmit={finishPasteurization}>
+                <label className={styles.finishCardText}>Product Id: </label>
+                <input
+                  className={styles.finishCardInput}
+                  name="id"
+                  type="text"
+                ></input>
+                <button className={styles.formButton}>Change Status</button>
+              </form>
+            </div>
+          )}
         </div>
+
         <div
           className={
             currStatus >= 3
