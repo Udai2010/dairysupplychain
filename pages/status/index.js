@@ -48,6 +48,7 @@ const Status = () => {
     }
   };
 
+
   return (
     <>
       <Head>
@@ -96,6 +97,7 @@ const Status = () => {
               {productDetails &&
                 productDetails.map((row) => (
                   <EventCard
+                    key={row[0]}
                     name={row[1]}
                     quantity={row[3]}
                     location={row[4]}
