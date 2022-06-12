@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import styles from "../../styles/Home.module.css";
+import styles from "../../styles/status.module.css";
 import React, { Component, useEffect, useState } from "react";
 import Header from "../../components/header/index";
 import HomeButton from "../../components/homeButton";
