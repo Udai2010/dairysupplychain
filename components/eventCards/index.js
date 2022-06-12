@@ -16,6 +16,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState, useEffect } from "react";
+import moment from "moment";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -37,6 +38,8 @@ export default function EventCard({
 }) {
   const [expanded, setExpanded] = useState(false);
   const [items, setItems] = useState([]);
+
+  var date = new Date(timestamp*1000).toLocaleString("en-US")
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -66,7 +69,7 @@ export default function EventCard({
                 Temperature: {temperature}
               </Typography>
               <Typography className={styles.eventCardText}>
-                Timestamp: {timestamp}
+                Date: {date}
               </Typography>
             </CardContent>
           </Collapse>
