@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import styles from "../../../styles/getStakeholder.module.css";
+import styles from "../../../styles/addStakeholder.module.css";
 import React, { Component } from "react";
 import NameCard from "../../../components/card/index";
 import Header from "../../../components/header/index";
