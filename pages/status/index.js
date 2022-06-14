@@ -32,6 +32,7 @@ const Status = () => {
     try {
       const accounts = await web3.eth.getAccounts();
       setAccount(accounts[0]);
+      
       const pd = await product.methods.getProduct(pid).call({
         from: account,
       });
@@ -41,12 +42,15 @@ const Status = () => {
           from: account,
         })
       );
-
+      
       setProductDetails(pd[4]);
+
     } catch (err) {
       alert(err);
     }
   };
+
+  
 
   const finishPasteurization = async (e) => {
     e.preventDefault();
@@ -63,15 +67,18 @@ const Status = () => {
         const fp = await product.methods.finishPasteurization(pid).send({
           from: account,
         });
+        alert("Pasteurization process Completed")
       } else {
         alert("Requirement not fulfilled");
       }
-
+  
       setCurrStatus(
         await product.methods.getCurrStatus(pid).call({
           from: account,
         })
       );
+
+
     } catch (err) {
       alert(err);
     }
@@ -140,7 +147,7 @@ const Status = () => {
         </div>
         <div
           className={
-            currStatus >= 2
+            currStatus > 2
               ? styles.eventCardContainer
               : styles.eventCardContainerRed
           }
@@ -148,7 +155,7 @@ const Status = () => {
           <Typography className={styles.eventCardTitle}>
             Pasteurization
           </Typography>
-          {account && currStatus < 3 && (
+          {account && currStatus == 2 && (
             <div className={styles.finishFormContainer}>
               <form name="search" onSubmit={finishPasteurization}>
                 <label className={styles.finishCardText}>Product Id: </label>
